@@ -20,6 +20,7 @@ const favoriteSchema = new Schema(
     recipeId: {
       type: String, // The ID of the recipe being favorited
       required: true,
+      unique: true,
     },
     recipeName: {
       type: String, // The name of the recipe

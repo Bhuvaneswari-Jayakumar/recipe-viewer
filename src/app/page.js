@@ -1,13 +1,4 @@
-// import Image from "next/image";
-// import { getPosts } from "../../_actions/postAction";
-// export default async function Home() {
-//   const res= await getPosts();
-//   console.log(res);
-//   return (
-//     <main>Hello Bhuvana</main>
-//   );
-// }
-'use client'; // Required to use React hooks in a Next.js page
+'use client'; 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
@@ -33,26 +24,29 @@ export default function HomePage() {
   if (loading) return <p>Loading recipes...</p>;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {recipes.map((recipe) => (
-        <div key={recipe.idMeal} className="border rounded-lg p-4 shadow hover:shadow-lg">
-          <img
-            src={recipe.strMealThumb}
-            alt={recipe.strMeal}
-            className="w-full h-40 object-cover rounded-md"
-          />
-          <h2 className="text-lg font-bold mt-2">{recipe.strMeal}</h2>
-          <Link
-             href={`/recipe/${recipe.idMeal}`}
-             className="text-blue-500 hover:underline mt-4 block">
-             View Details
-          </Link>
-        </div>
-      ))}
+    <div className="container mx-auto px-4">
+      <h1 className="text-2xl font-bold text-center mb-6">Recipe Collection</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {recipes.map((recipe) => (
+          <div key={recipe.idMeal} className="border rounded-lg p-4 shadow hover:shadow-lg transition-all duration-300 ease-in-out">
+            <img
+              src={recipe.strMealThumb}
+              alt={recipe.strMeal}
+              className="w-full h-40 object-cover rounded-md"
+            />
+            <h2 className="text-lg font-bold mt-2">{recipe.strMeal}</h2>
+            <Link
+              href={`/recipe/${recipe.idMeal}`}
+              className="text-blue-500 hover:underline mt-4 block text-center"
+            >
+              View Details
+            </Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
-
 
 
 
