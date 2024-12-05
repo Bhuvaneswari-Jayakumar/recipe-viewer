@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Recipe Viewer App
 
-## Getting Started
+## Project Overview
 
-First, run the development server:
+This is a simple recipe viewer app built with **Next.js**. The app allows users to:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- View a list of recipes fetched from an external API (TheMealDB).
+- View detailed information for each recipe, including its ingredients, instructions, and category.
+- Mark recipes as "favorites" and store them in a MongoDB database.
+- View all saved favorite recipes.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Note**: This project is still under development. While the backend connectivity and data fetching are fully functional, the frontend (especially the styling) is a work in progress. Tailwind CSS has not been fully configured due to my learning curve with it.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **View Recipes**: Displays a list of recipes fetched from the [TheMealDB API](https://www.themealdb.com/).
+- **Recipe Details**: Displays detailed information about a selected recipe, including ingredients and instructions.
+- **Favorites**: Users can mark recipes as favorites, and these favorites are stored in a MongoDB database.
+- **Favorites View**: A separate page displays all the saved favorite recipes.
 
-## Learn More
+## Technologies Used
 
-To learn more about Next.js, take a look at the following resources:
+- **Frontend**: 
+  - **Next.js** (for server-side rendering and routing)
+  - **React** (for component-based UI)
+  - **Tailwind CSS** (for styling, but not fully implemented due to lack of experience with it)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Backend**:
+  - **MongoDB Atlas** (for storing favorite recipes)
+  - **Axios** (for making HTTP requests to TheMealDB API)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Installation and Setup
 
-## Deploy on Vercel
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/yourusername/recipe-viewer.git
+   
+ ## Current Status
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Backend**: Fully functional, with connectivity to MongoDB for saving and fetching favorite recipes.
+- **Frontend**: Basic UI, with Tailwind CSS configured but not fully styled yet. Some layout and responsiveness issues may still exist.
+- **To Do**: Finalize styling and make the app fully responsive.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Future Improvements
+
+- **Improve the UI/UX design and layout**: Enhance the visual appeal and user experience of the app by refining the design and making it more intuitive.
+- **Make the app fully responsive on all screen sizes**: Ensure the app looks and works well on various devices, including mobile, tablet, and desktop.
+- **Add more features like user authentication and persistent favorites across devices**: Implement user authentication to save personalized favorites and allow users to access their data from any device.
+
+  ## Acknowledgments
+
+- **TheMealDB API** for providing the recipe data.
+- **MongoDB Atlas** for hosting the database.
+- **Next.js** and **React** for providing a solid foundation for building modern web apps.
