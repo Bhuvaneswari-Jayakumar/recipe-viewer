@@ -67,7 +67,7 @@ export default function RecipeDetailsPage({ params }) {
           alert('Added to favorites!');
         } else {
           const errorData = await response.json();
-          alert(`Failed to add favorite:Already added as Favourites!`);
+          alert(`Failed to add favorite:Already added as Favorites!`);
         }
       }
     } catch (error) {
