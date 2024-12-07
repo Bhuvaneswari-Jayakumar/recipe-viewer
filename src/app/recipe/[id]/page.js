@@ -8,11 +8,11 @@ export default function RecipeDetailsPage({ params }) {
   const [recipe, setRecipe] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
 
-  // Fetch recipe details when the page loads
+ 
   useEffect(() => {
     if (!id) {
       console.error('Recipe ID is missing!');
-      router.push('/'); // Redirect to the homepage if ID is invalid
+      router.push('/');
       return;
     }
 
@@ -24,56 +24,51 @@ export default function RecipeDetailsPage({ params }) {
           setRecipe(data.meals[0]);
         } else {
           console.error('Recipe not found!');
-          router.push('/'); // Redirect if no recipe is found
+          router.push('/');
         }
       } catch (error) {
         console.error('Error fetching recipe:', error);
-        router.push('/'); // Handle API errors by redirecting
+        router.push('/'); 
       }
     };
 
     fetchRecipe();
   }, [id, router]);
-
-  // Handle adding/removing from favorites
+  
   const handleToggleFavorite = async () => {
     try {
-      if (isFavorite) {
-        // Remove from favorites
-        const response = await fetch(`/api/favorites/${id}`, { method: 'DELETE' });
-        if (response.ok) {
-          setIsFavorite(false);
+      const favoriteData = {
+        recipeId: id,
+        recipeName: recipe.strMeal,
+        recipeImage: recipe.strMealThumb,
+      };
+  
+    
+      const addResponse = await fetch('/api/favorites', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(favoriteData),
+      });
+  
+      if (addResponse.ok) {
+        setIsFavorite(true); 
+        alert('Added to favorites!');
+      } else {
+        const deleteResponse = await fetch(`/api/favorites/${id}`, { method: 'DELETE' });
+  
+        if (deleteResponse.ok) {
+          setIsFavorite(false); 
           alert('Removed from favorites!');
         } else {
-          const errorData = await response.json();
+          const errorData = await deleteResponse.json();
           alert(`Failed to remove favorite: ${errorData.error}`);
-        }
-      } else {
-        // Add to favorites
-        const favoriteData = {
-          recipeId: id,
-          recipeName: recipe.strMeal,
-          recipeImage: recipe.strMealThumb,
-        };
-
-        const response = await fetch('/api/favorites', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(favoriteData),
-        });
-
-        if (response.ok) {
-          setIsFavorite(true);
-          alert('Added to favorites!');
-        } else {
-          const errorData = await response.json();
-          alert(`Failed to add favorite:Already added as Favorites!`);
         }
       }
     } catch (error) {
       console.error('Error toggling favorite:', error);
     }
   };
+  
 
   if (!recipe) {
     return <p className="text-center mt-4">Loading recipe details...</p>;
@@ -87,15 +82,27 @@ export default function RecipeDetailsPage({ params }) {
         alt={recipe.strMeal}
         className="w-full h-64 sm:h-80 object-cover rounded-md mb-6"
       />
+<div className="flex justify-center mb-6">
+  <button
+    onClick={handleToggleFavorite}
+    style={{
+      fontSize: '2rem',
+      width: '60px', 
+      height: '60px',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      color: isFavorite ? 'yellow' : 'gray',
+      backgroundColor: 'white',
+      borderRadius: '70%', 
+      border: '1px solid black', 
+      transition: 'background-color 0.3s ease, color 0.3s ease',
+    }}
+  >
+    ★
+  </button>
+</div>
 
-      <div className="flex justify-center mb-6">
-        <button
-          onClick={handleToggleFavorite}
-          className={`text-4xl ${isFavorite ? 'text-yellow-500' : 'text-gray-400'} transition-all duration-300 ease-in-out`}
-        >
-          ★
-        </button>
-      </div>
 
       <div className="space-y-4">
         <div>
