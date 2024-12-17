@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import './globals.css';
 export const metadata = {
   title: 'Recipe App',
   description: 'A simple recipe app with Next.js and Tailwind CSS',
